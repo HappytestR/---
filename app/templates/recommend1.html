@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>信息内容安全课程设计</title>
+  <link href="/static/css/style2.css" rel="stylesheet" media="all">
+  <link hre="/static/css/frame.css" rel="stylesheet">
+</head>
+<body cz-shortcut-listen="true">
+  <script async="" src="/static/js/analytics.js"></script>
+  <script src="/static/js/jquery-latest.min.js"></script>
+  <script src="/static/js/functions.js"></script>
+  <script async="" src="/static/js/native.js"></script>
+  <div id="header" class="soft_shadow">
+    <div class="wrap">
+      <a href="https://www.douban.com/doulist/240962/" id="logo">
+        <img alt="Color Hunt Palettes Logo"
+          src="/static/img/color-hunt-palettes-logo.png">电影推荐
+      </a>
+      <ol id="breadcrumbs">
+        <li>
+          <a href="www.baidu.com">百度论坛</a>
+        </li>
+        <li>
+          <a href="/pinggumoxing">推荐算法评估</a>
+        </li>
+      </ol>
+      <div id="breadcrumbs" style="position: absolute;top: 0;right: 0;padding: 0 10px;cursor: pointer;">
+        BORROWED BY ISCKESHE <a target="_blank" rel="noreferrer" href="www.baidu.com"> 信息内容安全课程设计
+      </a>
+    </div>
+  </div>
+  </div>
+  <div id="container" class="wrap">
+  <p style="font-size: 18px; line-height: 35px; color: gray;padding-left: 500px;">您选择的用户为</p>
+  <p style="font-size: 18px; line-height: 35px; color: gray;padding-left: 480px;">" User_ID        =      {{ Username }}     "</p>
+<p style="font-size: 18px; line-height: 35px; color: gray;padding-left: 505px;">用户喜欢的电影为</p>
+    <div id="feed">
+                        {% for movie_1 in ALLDATA.movices %}
+                         <div class="item block shadow" data-order="0" data-id="142173" data-code="c5fad9aceacff77feedb66e4" style="animation-delay: 0ms;"><div class="palette"
+								style="background-image: url({{'/static/img/test1.jpg'}});">
+								<div class="place c3">
+									<a href={{movie_1.douban_url}}></a>
+								</div>
+								<!-- <div class="place c1"></div> -->
+							</div>
+						 	<div class="like button like-font">
+                                <form action="/recommend" method="get"  id="next_form_{{movie_1}}">
+                                 <input type="hidden" name="movie_id" value={{movie_1}}>
+								<a onclick="document.getElementById('next_form_{{movie_1}}').submit();return false"><img alt="Color Hunt Palettes Heart Icon" src="/static/img/color-hunt-palettes-icon-heart.png"> <span>{{ movie_1}}</span>
+                                </a>
+                                </form>
+							</div>
+
+					 <span class="date">{{ movie_1}}-{{ALLDATA.moviceTitle[movie_1]}}</span>
+
+						</div>
+                        {% endfor %}
+    </div>
+<p style="font-size: 18px; line-height: 35px; color: gray;padding-left: 450px;">使用UserCF算法推荐的电影为</p>
+    <div id="feed">
+                <p>使用最简单的UserCF算法推荐的电影为</p>
+                {% for movie_1 in ALLDATA.recommendUserCF1 %}
+                         <div class="item block shadow" data-order="0" data-id="142173"
+							data-code="c5fad9aceacff77feedb66e4"
+							style="animation-delay: 0ms;">
+							<div class="palette"
+								style="background-image: url({{"/static/img/test2.jpg"}});">
+								<div class="place c3">
+									<a href='#'></a>
+								</div>
+								<!-- <div class="place c1"></div> -->
+							</div>
+							<div class="like button like-font">
+                                  <form action="/recommend" method="get"  id="next_form_2__{{movie_1.movie_id}}">
+                                      <input type="hidden" name="movie_id" value={{movie_1.movie_id}}>
+								<a onclick="document.getElementById('next_form_2__{{movie_1.movie_id}}').submit();return false"><img alt="Color Hunt Palettes Heart Icon"
+									src="/static/img/color-hunt-palettes-icon-heart.png"> <span>{{ movie_1.average_rating}}</span>
+                                </a>
+                                  </form>
+							</div>
+							<span class="date">{{movie_1}}{{ALLDATA.moviceTitle[movie_1]}}</span>
+						</div>
+            {% endfor %}
+            <p>使用改进的UserCF推荐的算法如下</p>
+                            {% for movie_1 in  ALLDATA.recommendUserCF2%}
+                         <div class="item block shadow" data-order="0" data-id="142173"
+							data-code="c5fad9aceacff77feedb66e4"
+							style="animation-delay: 0ms;">
+							<div class="palette"
+								style="background-image: url({{"/static/img/test11.gif"}});">
+								<div class="place c3">
+									<a href='#'></a>
+								</div>
+								<!-- <div class="place c1"></div> -->
+							</div>
+							<div class="like button like-font">
+                                  <form action="/recommend" method="get"  id="next_form_2__{{movie_1.movie_id}}">
+                                      <input type="hidden" name="movie_id" value={{movie_1.movie_id}}>
+								<a onclick="document.getElementById('next_form_2__{{movie_1.movie_id}}').submit();return false"><img alt="Color Hunt Palettes Heart Icon"
+									src="/static/img/color-hunt-palettes-icon-heart.png"> <span>{{ movie_1.average_rating}}</span>
+                                </a>
+                                  </form>
+							</div>
+							<span class="date">{{movie_1}}{{ALLDATA.moviceTitle[movie_1]}}</span>
+						</div>
+            {% endfor %}
+            <p>使用基于时间上下文的UserCF推荐的算法如下</p>
+                            {% for movie_1 in ALLDATA.recommendUserCF3 %}
+                         <div class="item block shadow" data-order="0" data-id="142173"
+							data-code="c5fad9aceacff77feedb66e4"
+							style="animation-delay: 0ms;">
+							<div class="palette"
+								style="background-image: url({{"/static/img/test4.jpg"}});">
+								<div class="place c3">
+									<a href='#'></a>
+								</div>
+								<!-- <div class="place c1"></div> -->
+							</div>
+							<div class="like button like-font">
+                                  <form action="/recommend" method="get"  id="next_form_2__{{movie_1.movie_id}}">
+                                      <input type="hidden" name="movie_id" value={{movie_1.movie_id}}>
+								<a onclick="document.getElementById('next_form_2__{{movie_1.movie_id}}').submit();return false"><img alt="Color Hunt Palettes Heart Icon"
+									src="/static/img/color-hunt-palettes-icon-heart.png"> <span>{{ movie_1.average_rating}}</span>
+                                </a>
+                                  </form>
+							</div>
+							<span class="date">{{movie_1}}{{ALLDATA.moviceTitle[movie_1]}}</span>
+						</div>
+            {% endfor %}
+    </div>
+<p style="font-size: 18px; line-height: 35px; color: gray;padding-left: 450px;">使用ItemCF算法推荐的电影为</p>
+    <div id="feed">
+                <p>使用最简单ItemCF推荐如下</p>
+                {% for movie_1 in ALLDATA.recommendItemCF1 %}
+                         <div class="item block shadow" data-order="0" data-id="142173"
+							data-code="c5fad9aceacff77feedb66e4"
+							style="animation-delay: 0ms;">
+							<div class="palette"
+								style="background-image: url({{"/static/img/test5.jpg"}});">
+								<div class="place c3">
+									<a href='#'></a>
+								</div>
+								<!-- <div class="place c1"></div> -->
+							</div>
+							<div class="like button like-font">
+                                  <form action="/recommend" method="get"  id="next_form_2__{{movie_1.movie_id}}">
+                                      <input type="hidden" name="movie_id" value={{movie_1.movie_id}}>
+								<a onclick="document.getElementById('next_form_2__{{movie_1.movie_id}}').submit();return false"><img alt="Color Hunt Palettes Heart Icon"
+									src="/static/img/color-hunt-palettes-icon-heart.png"> <span>{{ movie_1.average_rating}}</span>
+                                </a>
+                                  </form>
+							</div>
+							<span class="date">{{ movie_1}}-{{ALLDATA.moviceTitle[movie_1]}}</span>
+						</div>
+            {% endfor %}
+            <p>使用改进ItemCF推荐如下</p>
+                            {% for movie_1 in ALLDATA.recommendItemCF2 %}
+                         <div class="item block shadow" data-order="0" data-id="142173"
+							data-code="c5fad9aceacff77feedb66e4"
+							style="animation-delay: 0ms;">
+							<div class="palette"
+								style="background-image: url({{"/static/img/test6.jpg"}});">
+								<div class="place c3">
+									<a href='#'></a>
+								</div>
+								<!-- <div class="place c1"></div> -->
+							</div>
+							<div class="like button like-font">
+                                  <form action="/recommend" method="get"  id="next_form_2__{{movie_1.movie_id}}">
+                                      <input type="hidden" name="movie_id" value={{movie_1.movie_id}}>
+								<a onclick="document.getElementById('next_form_2__{{movie_1.movie_id}}').submit();return false"><img alt="Color Hunt Palettes Heart Icon"
+									src="/static/img/color-hunt-palettes-icon-heart.png"> <span>{{ movie_1.average_rating}}</span>
+                                </a>
+                                  </form>
+							</div>
+							<span class="date">{{ movie_1}}-{{ALLDATA.moviceTitle[movie_1]}}</span>
+						</div>
+            {% endfor %}
+            <p>使用基于时间上下文ItemCF推荐如下</p>
+                            {% for movie_1 in ALLDATA.recommendItemCF3 %}
+                         <div class="item block shadow" data-order="0" data-id="142173"
+							data-code="c5fad9aceacff77feedb66e4"
+							style="animation-delay: 0ms;">
+							<div class="palette"
+								style="background-image: url({{"/static/img/test7.jpg"}});">
+								<div class="place c3">
+									<a href='#'></a>
+								</div>
+								<!-- <div class="place c1"></div> -->
+							</div>
+							<div class="like button like-font">
+                                  <form action="/recommend" method="get"  id="next_form_2__{{movie_1.movie_id}}">
+                                      <input type="hidden" name="movie_id" value={{movie_1.movie_id}}>
+								<a onclick="document.getElementById('next_form_2__{{movie_1.movie_id}}').submit();return false"><img alt="Color Hunt Palettes Heart Icon"
+									src="/static/img/color-hunt-palettes-icon-heart.png"> <span>{{ movie_1.average_rating}}</span>
+                                </a>
+                                  </form>
+							</div>
+							<span class="date">{{ movie_1}}-{{ALLDATA.moviceTitle[movie_1]}}</span>
+						</div>
+            {% endfor %}
+    </div>
+<p style="font-size: 18px; line-height: 35px; color: gray;padding-left: 450px;">使用基于SVD算法推荐的电影为</p>
+    <div id="feed">
+                <p>使用简单SVD算法推荐的电影为<p>
+                {% for movie_1 in ALLDATA.recommendSVD %}
+                         <div class="item block shadow" data-order="0" data-id="142173"
+							data-code="c5fad9aceacff77feedb66e4"
+							style="animation-delay: 0ms;">
+							<div class="palette"
+								style="background-image: url({{"/static/img/test8.jpg"}});">
+								<div class="place c3">
+									<a href={{movie_1.douban_url}}></a>
+								</div>
+								<!-- <div class="place c1"></div> -->
+							</div>
+							<div class="like button like-font">
+                                  <form action="/recommend" method="get"  id="next_form_2__{{movie_1.movie_id}}">
+                                      <input type="hidden" name="movie_id" value={{movie_1.movie_id}}>
+								<a onclick="document.getElementById('next_form_2__{{movie_1.movie_id}}').submit();return false"><img alt="Color Hunt Palettes Heart Icon"
+									src="/static/img/color-hunt-palettes-icon-heart.png"> <span>{{ movie_1.average_rating}}</span>
+                                </a>
+                                  </form>
+							</div>
+							<span class="date">{{ movie_1}}-{{ALLDATA.moviceTitle[movie_1]}}</span>
+						</div>
+            {% endfor %}
+            <p>使用LFM推荐算法推荐的电影为</p>
+            {% for movie_1 in ALLDATA.recommendLFM %}
+                         <div class="item block shadow" data-order="0" data-id="142173"
+							data-code="c5fad9aceacff77feedb66e4"
+							style="animation-delay: 0ms;">
+							<div class="palette"
+								style="background-image: url({{"/static/img/test9.jpg"}});">
+								<div class="place c3">
+									<a href={{movie_1.douban_url}}></a>
+								</div>
+								<!-- <div class="place c1"></div> -->
+							</div>
+							<div class="like button like-font">
+                                  <form action="/recommend" method="get"  id="next_form_2__{{movie_1.movie_id}}">
+                                      <input type="hidden" name="movie_id" value={{movie_1.movie_id}}>
+								<a onclick="document.getElementById('next_form_2__{{movie_1.movie_id}}').submit();return false"><img alt="Color Hunt Palettes Heart Icon"
+									src="/static/img/color-hunt-palettes-icon-heart.png"> <span>{{ movie_1.average_rating}}</span>
+                                </a>
+                                  </form>
+							</div>
+							<span class="date">{{ movie_1}}-{{ALLDATA.moviceTitle[movie_1]}}</span>
+						</div>
+            {% endfor %}
+    </div>
+<p style="font-size: 18px; line-height: 35px; color: gray;padding-left: 450px;">使用基于标签推荐算法推荐的电影为</p>
+    <div id="feed">
+                {% for movie_1 in ALLDATA.recommendbiaoqian %}
+                         <div class="item block shadow" data-order="0" data-id="142173"
+							data-code="c5fad9aceacff77feedb66e4"
+							style="animation-delay: 0ms;">
+							<div class="palette"
+								style="background-image: url({{"/static/img/test10.jpg"}});">
+								<div class="place c3">
+									<a href={{movie_1.douban_url}}></a>
+								</div>
+								<!-- <div class="place c1"></div> -->
+							</div>
+							<div class="like button like-font">
+                                  <form action="/recommend" method="get"  id="next_form_2__{{movie_1.movie_id}}">
+                                      <input type="hidden" name="movie_id" value={{movie_1.movie_id}}>
+								<a onclick="document.getElementById('next_form_2__{{movie_1.movie_id}}').submit();return false"><img alt="Color Hunt Palettes Heart Icon"
+									src="/static/img/color-hunt-palettes-icon-heart.png"> <span>{{ movie_1.average_rating}}</span>
+                                </a>
+                                  </form>
+							</div>
+							<span class="date">{{ movie_1}}-{{ALLDATA.moviceTitle[movie_1]}}</span>
+						</div>
+            {% endfor %}
+    </div>
+<div id="side">
+			<div id="search">
+                <form  action="/pinggu" method="get"  id="searchForm">
+					<input type="text" placeholder="请输入对应的用户名称" name="user_id"
+						value=""> <a onclick="document:searchForm.submit()"><img
+						src="/static/img/color-hunt-palettes-icon-search.png"> </a>
+				</form>
+			</div>
+			<div id="main" style="margin-top: 40px">
+                    <h1>信息内容安全课程设计 </h1>
+                    <h2>推荐系统的设计</h2>
+                    <h2>本推荐系统的设计主要分为三个部分的设计内容</h2>
+                    <h2>1.ItemCF的三部分（原始算法，IUF优化算法，基于time的优化)</h2>
+                    <h2>2.UserCF的三部分（原始算法，IIF优化算法，基于time的优化）</h2>
+                    <h2>3.基于SVD的优化算法</h2>
+                    <a href="https://grouplens.org/datasets/movielens/"><h2>点击查看本次课设使用的训练集</h2></a>
+				</div>
+			</div>
+		</div>
+  </div>
+  <script type="text/javascript">
+    $(function () {
+      current = "palettes";
+      tags = "";
+      select_menu_button(current);
+    });
+  </script>
+</body>
+</html>

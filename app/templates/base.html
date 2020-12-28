@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% extends "bootstrap/base.html" %}
+    {% block title %}Flasky{% endblock %}
+    {% block head %}
+    {{ super() }}
+    <link rel="shortcut icon" href="{{ url_for('static', filename='2.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='2.png') }}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    {% if current_user.is_authenticated %}
+    <li>
+        <a href="{{ url_for('main.user',username=current_user.username) }}">Profile</a>
+    </li>
+    {% endblock %}
+</head>
+<body>
+    <ul class="nav navbar-nav navbar-right">
+        {% if current_user.is_suthenticated %}
+        <li><a herf="{{ url_for('auth.logout') }}">Log out</a></li>
+        <li><a herf="{{ url_for('auth.login') }}">Log in</a></li>
+        {% endif %}
+    </ul>
+    {% block navbar %}
+    <div class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle"
+                        data-toggle="collapse" data-target=".navbar-collapes">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Flasky</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">Home</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+
+    {% block content %}
+    <div class="container">
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert_warning">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% block page_content %}{% endblock %}
+    </div>
+    {% endblock %}
+
+    {% block scripts %}
+    {{ super() }}
+    {{ moment.include_moment() }}
+    {% endblock %}
+</body>
+</html>
